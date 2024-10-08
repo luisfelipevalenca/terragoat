@@ -33,6 +33,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Run Prisma Cloud IaC Scan to check
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Run Prisma Cloud 
+        id: prisma-cloud
+        uses: bridgecrewio/checkov-action@master
+        env:
+          PRISMA_API_URL: https://api.prismacloud.io
+        with:
+          api-key: ${{ secrets.BC_API_KEY }}
       - name: Checkout
         uses: actions/checkout@v4
       - id: iac-scan
